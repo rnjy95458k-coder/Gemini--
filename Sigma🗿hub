@@ -1,0 +1,382 @@
+-- [[ sigma🗿 Hub Script ]] --
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({
+    Name = "sigma🗿",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "SigmaConfig",
+    IntroText = "sigma🗿 Loading..."
+})
+
+-- Services
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local LocalPlayer = Players.LocalPlayer
+
+-- Variables
+local FlyEnabled = false
+local FlySpeed = 50
+local WalkSpeedVal = 16
+local SpeedEnabled = false
+local AimbotEnabled = false
+local AutoFruit = false
+local AutoGun = false
+local AutoSword = false
+local AutoMelee = false
+
+-- Tabs
+local PlayerTab = Window:MakeTab({
+    Name = "Player / ตัวละคร",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local CombatTab = Window:MakeTab({
+    Name = "Combat / ระบบต่อสู้",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- 1. บิน (Fly)
+PlayerTab:AddToggle({
+    Name = "เปิด/ปิด บิน (Fly)",
+    Default = false,
+    Callback = function(Value)
+        FlyEnabled = Value
+    end
+})
+
+PlayerTab:AddSlider({
+    Name = "ความเร็วบิน (Fly Speed)",
+    Min = 10,
+    Max = 300,
+    Default = 50,
+    Color = Color3.fromRGB(0, 255, 150),
+    Increment = 5,
+    ValueName = "Speed",
+    Callback = function(Value)
+        FlySpeed = Value
+    end
+})
+
+-- 3. วิ่งไว (WalkSpeed)
+PlayerTab:AddToggle({
+    Name = "เปิดระบบวิ่งไว (Speed Hack)",
+    Default = false,
+    Callback = function(Value)
+        SpeedEnabled = Value
+        if not Value and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+            LocalPlayer.Character.Humanoid.WalkSpeed = 16
+        end
+    end
+})
+
+PlayerTab:AddSlider({
+    Name = "ปรับความเร็ววิ่ง (Walk Speed)",
+    Min = 16,
+    Max = 300,
+    Default = 50,
+    Color = Color3.fromRGB(0, 150, 255),
+    Increment = 5,
+    ValueName = "Speed",
+    Callback = function(Value)
+        WalkSpeedVal = Value
+    end
+})
+
+-- 2. อิมบอท (Aimbot)
+CombatTab:AddToggle({
+    Name = "อิมบอท ล็อกเป้า (Aimbot)",
+    Default = false,
+    Callback = function(Value)
+        AimbotEnabled = Value
+    end
+})
+
+-- 4. ออโต้ล็อกสกิลผล (Auto Skill Fruit)
+CombatTab:AddToggle({
+    Name = "ออโต้สกิล ผลปีศาจ (Fruit)",
+    Default = false,
+    Callback = function(Value)
+        AutoFruit = Value
+    end
+})
+
+-- 5. ออโต้สกิลปืน (Auto Skill Gun)
+CombatTab:AddToggle({
+    Name = "ออโต้สกิล ปืน (Gun)",
+    Default = false,
+    Callback = function(Value)
+        AutoGun = Value
+    end
+})
+
+-- 6. ออโต้สกิลดาบ (Auto Skill Sword)
+CombatTab:AddToggle({
+    Name = "ออโต้สกิล ดาบ (Sword)",
+    Default = false,
+    Callback = function(Value)
+        AutoSword = Value
+    end
+})
+
+-- 7. ออโต้สกิลหมัด (Auto Skill Melee)
+CombatTab:AddToggle({
+    Name = "ออโต้สกิล หมัด (Melee)",
+    Default = false,
+    Callback = function(Value)
+        AutoMelee = Value
+    end
+})
+
+-- Functions & System Logic --
+
+-- Fly & Speed System Loop
+local bv, bg
+RunService.RenderStepped:Connect(function()
+    local char = LocalPlayer.Character
+    if char and char:FindFirstChild("Humanoid") then
+        if SpeedEnabled then
+            char.Humanoid.WalkSpeed = WalkSpeedVal
+        end
+    end
+
+    if FlyEnabled and char and char:FindFirstChild("HumanoidRootPart") then
+        local hrp = char.HumanoidRootPart
+        if not hrp:FindFirstChild("SigmaFlyBV") then
+            bv = Instance.new("BodyVelocity")
+            bv.Name = "SigmaFlyBV"
+            bv.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+            bv.Parent = hrp
+
+            bg = Instance.new("BodyGyro")
+            bg.Name = "SigmaFlyBG"
+            bg.MaxTorque = Vector3.new(9e9, 9e9, 9e9)
+            bg.P = 9e4
+            bg.Parent = hrp
+        end
+
+        local cam = workspace.CurrentCamera
+        bg.CFrame = cam.CFrame
+
+        local dir = Vector3.new()
+        if UserInputService:IsKeyDown(Enum.KeyCode.W) then dir = dir + cam.CFrame.LookVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.S) then dir = dir - cam.Cนี่คือสคริปต์ **sigma🗿** ที่เขียนด้วย ภาษา Lua โดยใช้ **Rayfield UI Library** เพื่อสร้างเมนูควบคุมทั้ง 7 ฟังก์ชันตามที่ต้องการ สามารถนำไปรันใน Executor บน Roblox ได้ทันที
+
+```lua
+-- [[ Script Name: sigma🗿 ]] --
+
+local Rayfield = loadstring(game:HttpGet('[https://sirius.menu/rayfield](https://sirius.menu/rayfield)'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "sigma🗿 Hub",
+   LoadingTitle = "sigma🗿 Loading...",
+   LoadingSubtitle = "Powered by Rayfield UI",
+   ConfigurationSaving = { Enabled = false },
+   KeySystem = false
+})
+
+-- Services & Variables
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+local Flying = false
+local FlySpeed = 50
+local SpeedEnabled = false
+local WalkSpeedValue = 16
+local AimbotEnabled = false
+
+local AutoFruit = false
+local AutoGun = false
+local AutoSword = false
+local AutoMelee = false
+
+-- 1. ระบบบิน (Fly System)
+local bodyVelocity, bodyGyro
+RunService.RenderStepped:Connect(function()
+    if Flying and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        local HRP = LocalPlayer.Character.HumanoidRootPart
+        
+        if not bodyVelocity then
+            bodyVelocity = Instance.new("BodyVelocity")
+            bodyVelocity.MaxForce = Vector3.new(1e9, 1e9, 1e9)
+            bodyVelocity.Parent = HRP
+        end
+        
+        if not bodyGyro then
+            bodyGyro = Instance.new("BodyGyro")
+            bodyGyro.MaxTorque = Vector3.new(1e9, 1e9, 1e9)
+            bodyGyro.P = 9e4
+            bodyGyro.Parent = HRP
+        end
+        
+        local Camera = workspace.CurrentCamera
+        bodyGyro.CFrame = Camera.CFrame
+        
+        local moveDir = Vector3.new()
+        if UserInputService:IsKeyDown(Enum.KeyCode.W) then moveDir = moveDir + Camera.CFrame.LookVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.S) then moveDir = moveDir - Camera.CFrame.LookVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.A) then moveDir = moveDir - Camera.CFrame.RightVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.D) then moveDir = moveDir + Camera.CFrame.RightVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.Space) then moveDir = moveDir + Vector3.new(0, 1, 0) end
+        if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then moveDir = moveDir - Vector3.new(0, 1, 0) end
+        
+        if moveDir.Magnitude > 0 then
+            bodyVelocity.Velocity = moveDir.Unit * FlySpeed
+        else
+            bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+        end
+    else
+        if bodyVelocity then bodyVelocity:Destroy() bodyVelocity = nil end
+        if bodyGyro then bodyGyro:Destroy() bodyGyro = nil end
+    end
+end)
+
+-- 2. ระบบวิ่งไว (WalkSpeed)
+RunService.RenderStepped:Connect(function()
+    if SpeedEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
+        LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = WalkSpeedValue
+    end
+end)
+
+-- 3. ระบบอิมบอท (Aimbot)
+local function getClosestPlayer()
+    local closestPlayer = nil
+    local shortestDistance = math.huge
+    local Camera = workspace.CurrentCamera
+    
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid.Health > 0 then
+                local pos, onScreen = Camera:WorldToViewportPoint(player.Character.HumanoidRootPart.Position)
+                if onScreen then
+                    local mousePos = UserInputService:GetMouseLocation()
+                    local distance = (Vector2.new(pos.X, pos.Y) - mousePos).Magnitude
+                    if distance < shortestDistance then
+                        shortestDistance = distance
+                        closestPlayer = player
+                    end
+                end
+            end
+        end
+    end
+    return closestPlayer
+end
+
+RunService.RenderStepped:Connect(function()
+    if AimbotEnabled then
+        local target = getClosestPlayer()
+        if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+            workspace.CurrentCamera.CFrame = CFrame.new(workspace.CurrentCamera.CFrame.Position, target.Character.HumanoidRootPart.Position)
+        end
+    end
+end)
+
+-- ฟังก์ชันช่วยกดปุ่มสกิล
+local function pressKeys(keys)
+    for _, key in ipairs(keys) do
+        VirtualInputManager:SendKeyPressEvent(true, key, false, game)
+        task.wait(0.05)
+        VirtualInputManager:SendKeyPressEvent(false, key, false, game)
+        task.wait(0.15)
+    end
+end
+
+-- 4-7. ระบบออโต้สกิล (Auto Skill Loop)
+task.spawn(function()
+    while task.wait(0.4) do
+        if AutoFruit then
+            pressKeys({Enum.KeyCode.Z, Enum.KeyCode.X, Enum.KeyCode.C, Enum.KeyCode.V, Enum.KeyCode.F})
+        end
+        if AutoGun then
+            pressKeys({Enum.KeyCode.Z, Enum.KeyCode.X})
+        end
+        if AutoSword then
+            pressKeys({Enum.KeyCode.Z, Enum.KeyCode.X})
+        end
+        if AutoMelee then
+            pressKeys({Enum.KeyCode.Z, Enum.KeyCode.X, Enum.KeyCode.C})
+        end
+    end
+end)
+
+-- ==================== UI Setup ==================== --
+
+local MainTab = Window:CreateTab("ฟังก์ชันหลัก 🗿", 4483362458)
+local SkillTab = Window:CreateTab("ออโต้สกิล ⚔️", 4483362458)
+
+-- 1. บิน
+MainTab:CreateToggle({
+   Name = "บิน (Fly)",
+   CurrentValue = false,
+   Callback = function(Value) Flying = Value end,
+})
+
+MainTab:CreateSlider({
+   Name = "ปรับความเร็วการบิน",
+   Range = {10, 300},
+   Increment = 5,
+   CurrentValue = 50,
+   Callback = function(Value) FlySpeed = Value end,
+})
+
+-- 2. อิมบอท
+MainTab:CreateToggle({
+   Name = "อิมบอท (Aimbot ล็อกเป้า)",
+   CurrentValue = false,
+   Callback = function(Value) AimbotEnabled = Value end,
+})
+
+-- 3. วิ่งไว
+MainTab:CreateToggle({
+   Name = "วิ่งไว (Speed)",
+   CurrentValue = false,
+   Callback = function(Value)
+      SpeedEnabled = Value
+      if not Value and LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
+          LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = 16
+      end
+   end,
+})
+
+MainTab:CreateSlider({
+   Name = "ปรับความเร็วการวิ่ง",
+   Range = {16, 300},
+   Increment = 5,
+   CurrentValue = 50,
+   Callback = function(Value) WalkSpeedValue = Value end,
+})
+
+-- 4. ออโต้ล็อกสกิลผล
+SkillTab:CreateToggle({
+   Name = "ออโต้สกิลผล (Fruit Skills: Z,X,C,V,F)",
+   CurrentValue = false,
+   Callback = function(Value) AutoFruit = Value end,
+})
+
+-- 5. ออโต้สกิลปืน
+SkillTab:CreateToggle({
+   Name = "ออโต้สกิลปืน (Gun Skills: Z,X)",
+   CurrentValue = false,
+   Callback = function(Value) AutoGun = Value end,
+})
+
+-- 6. ออโต้สกิลดาบ
+SkillTab:CreateToggle({
+   Name = "ออโต้สกิลดาบ (Sword Skills: Z,X)",
+   CurrentValue = false,
+   Callback = function(Value) AutoSword = Value end,
+})
+
+-- 7. ออโต้สกิลหมัด
+SkillTab:CreateToggle({
+   Name = "ออโต้สกิลหมัด (Melee Skills: Z,X,C)",
+   CurrentValue = false,
+   Callback = function(Value) AutoMelee = Value end,
+})
